@@ -1,11 +1,6 @@
-/* Tailwind Directives */
-/* @import 'tailwindcss'; */
-/* @config "../../tailwind.config.js"; */
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-/* @config "../../tailwind.config.js"; */
 
 /* Your custom styles */
 @layer base {
