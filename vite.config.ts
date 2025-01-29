@@ -11,7 +11,17 @@ import autoprefixer from 'autoprefixer'
 
 // https://vite.dev/config/
 export default defineConfig({
-  plugins: [VueRouter(), vue(), vueDevTools()],
+  plugins: [
+    VueRouter(),
+    vue({
+      template: {
+        complierOptions: {
+          isCustomElement: (element) => element.startsWith('iconify-icon'),
+        },
+      },
+    }),
+    vueDevTools(),
+  ],
   css: {
     postcss: {
       plugins: [tailwindcss, autoprefixer], // Use ES module imports instead of require
