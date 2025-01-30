@@ -22,7 +22,7 @@ declare module 'vue-router/auto-routes' {
     '/[...catchAll]': RouteRecordInfo<'/[...catchAll]', '/:catchAll(.*)', { catchAll: ParamValue<true> }, { catchAll: ParamValue<false> }>,
     '/Projects/': RouteRecordInfo<'/Projects/', '/Projects', Record<never, never>, Record<never, never>>,
     '/Projects/[slug]': RouteRecordInfo<'/Projects/[slug]', '/Projects/:slug', { slug: ParamValue<true> }, { slug: ParamValue<false> }>,
-    '/tasks/': RouteRecordInfo<'/tasks/', '/tasks', Record<never, never>, Record<never, never>>,
-    '/tasks/[id]': RouteRecordInfo<'/tasks/[id]', '/tasks/:id', { id: ParamValue<true> }, { id: ParamValue<false> }>,
+    '/Tasks/': RouteRecordInfo<'/Tasks/', '/Tasks', Record<never, never>, Record<never, never>>,
+    '/Tasks/[id]': RouteRecordInfo<'/Tasks/[id]', '/Tasks/:id', { id: ParamValue<true> }, { id: ParamValue<false> }>,
   }
 }
