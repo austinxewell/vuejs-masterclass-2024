@@ -20,12 +20,12 @@ export const projectQuery = (slug: string) =>
     .select(
       `
    *,
-   tasks (
+  tasks (
     id,
     name,
     status,
     due_date
-   )
+  )
   `,
     )
     .eq('slug', slug)
