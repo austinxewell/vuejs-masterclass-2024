@@ -33,7 +33,7 @@ export const projectQuery = (slug: string) =>
 
 export type Project = QueryData<ReturnType<typeof projectQuery>>
 
-export const taskQuery = (id: string) => {
+export const taskQuery = (id: string | number) => {
   return supabase
     .from('tasks')
     .select(
@@ -44,7 +44,7 @@ export const taskQuery = (id: string) => {
       slug
     )`,
     )
-    .eq('id', id)
+    .eq('id', id as number)
     .single()
 }
 
