@@ -26,5 +26,6 @@ declare module 'vue-router/auto-routes' {
     '/register': RouteRecordInfo<'/register', '/register', Record<never, never>, Record<never, never>>,
     '/Tasks/': RouteRecordInfo<'/Tasks/', '/Tasks', Record<never, never>, Record<never, never>>,
     '/Tasks/[id]': RouteRecordInfo<'/Tasks/[id]', '/Tasks/:id', { id: ParamValue<true> }, { id: ParamValue<false> }>,
+    '/users/[username]': RouteRecordInfo<'/users/[username]', '/users/:username', { username: ParamValue<true> }, { username: ParamValue<false> }>,
   }
 }
