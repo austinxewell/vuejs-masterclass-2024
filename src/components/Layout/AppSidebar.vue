@@ -34,10 +34,10 @@ const accountLinks = [
   },
 ]
 
-const executeAction = (linkTitle: string) => {
+const executeAction = async (linkTitle: string) => {
   if (linkTitle === 'Sign Out') {
-    console.log(linkTitle)
-    //.. do something
+    const { logout } = await import('@/utils/supaAuth')
+    await logout()
   }
 }
 </script>
