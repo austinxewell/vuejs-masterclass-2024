@@ -1,4 +1,4 @@
-import { projectQuery, projectsQuery } from '@/utils/supaQueries'
+import { projectQuery, projectsQuery, updateProjectQuery } from '@/utils/supaQueries'
 import { useMemoize } from '@vueuse/core'
 import type { Project, Projects } from '@/utils/supaQueries'
 
@@ -32,6 +32,8 @@ export const useProjectsStore = defineStore('projects-store', () => {
   }
 
   const getProjects = async () => {
+    projects.value = null
+
     const { data, error, status } = await loadProjects('projects')
 
     if (error) useErrorStore().setError({ error, customCode: status })
@@ -47,6 +49,8 @@ export const useProjectsStore = defineStore('projects-store', () => {
   }
 
   const getSingleProject = async (slug: string) => {
+    project.value = null
+
     const { data, error, status } = await loadProject(slug)
 
     if (error) useErrorStore().setError({ error, customCode: status })
@@ -61,10 +65,20 @@ export const useProjectsStore = defineStore('projects-store', () => {
     })
   }
 
+  const updateProject = async () => {
+    if (!project.value) return
+
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const { tasks, id, ...projectsProperties } = project.value
+
+    await updateProjectQuery(projectsProperties, project.value.id)
+  }
+
   return {
     projects,
     getProjects,
     getSingleProject,
     project,
+    updateProject,
   }
 })
