@@ -1,5 +1,7 @@
 # vuejs-masterclass-2024
 
+view live app on: https://pulse-project-managment.netlify.app/
+
 This template should help get you started developing with Vue 3 in Vite.
 
 ## Recommended IDE Setup
