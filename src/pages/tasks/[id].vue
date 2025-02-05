@@ -1,9 +1,10 @@
 <script setup lang="ts">
+import AppInPlaceEditText from '@/components/AppInPlaceEdit/AppInPlaceEditText.vue'
 import { useTaskStore } from '@/stores/loaders/tasks'
-
 const taskStore = useTaskStore()
+
 const { task } = storeToRefs(taskStore)
-const { getSingleTask } = taskStore
+const { getSingleTask, updateTask } = taskStore
 const { id } = useRoute('/Tasks/[id]').params
 
 watch(
@@ -20,11 +21,15 @@ await getSingleTask(id)
   <Table v-if="task">
     <TableRow>
       <TableHead> Name </TableHead>
-      <TableCell> {{ task.name }} </TableCell>
+      <TableCell>
+        <AppInPlaceEditText v-model="task.name" @commit="updateTask" />
+      </TableCell>
     </TableRow>
     <TableRow>
       <TableHead> Description </TableHead>
-      <TableCell>{{ task.description }}</TableCell>
+      <TableCell>
+        <AppInPlaceEditTextArea v-model="task.description" @commit="updateTask" />
+      </TableCell>
     </TableRow>
     <TableRow>
       <TableHead> Assignee </TableHead>
@@ -36,7 +41,7 @@ await getSingleTask(id)
     </TableRow>
     <TableRow>
       <TableHead> Status </TableHead>
-      <TableCell>{{ task.status }}</TableCell>
+      <TableCell><AppInPlaceEditStatus v-model="task.status" @commit="updateTask" /></TableCell>
     </TableRow>
     <TableRow>
       <TableHead> Collaborators </TableHead>
