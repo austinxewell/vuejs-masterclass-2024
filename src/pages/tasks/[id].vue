@@ -37,7 +37,13 @@ await getSingleTask(id)
     </TableRow>
     <TableRow>
       <TableHead> Project </TableHead>
-      <TableCell> {{ task.projects?.name }} </TableCell>
+      <TableCell>
+        <RouterLink
+          :to="{ name: '/Projects/[slug]', params: { slug: task.projects?.slug as string } }"
+        >
+          {{ task.projects?.name }}
+        </RouterLink></TableCell
+      >
     </TableRow>
     <TableRow>
       <TableHead> Status </TableHead>
