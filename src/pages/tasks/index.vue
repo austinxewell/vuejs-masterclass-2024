@@ -1,19 +1,12 @@
 <script setup lang="ts">
+import { useTaskStore } from '@/stores/loaders/tasks'
 import { columns } from '@/utils/tableColumns/tasksColumns'
-import { tasksWithProjectsQuery } from '@/utils/supaQueries'
-import type { TasksWithProjects } from '@/utils/supaQueries'
+
+const taskStore = useTaskStore()
+const { tasks } = storeToRefs(taskStore)
+const { getTasks } = taskStore
 
 usePageStore().pageData.title = 'My Tasks'
-
-const tasks = ref<TasksWithProjects | null>(null)
-
-const getTasks = async () => {
-  const { data, error, status } = await tasksWithProjectsQuery
-
-  if (error) useErrorStore().setError({ error, customCode: status })
-
-  tasks.value = data
-}
 
 await getTasks()
 </script>

@@ -1,11 +1,10 @@
 <script setup lang="ts">
-import { taskQuery } from '@/utils/supaQueries'
-import type { Task } from '@/utils/supaQueries'
+import { useTaskStore } from '@/stores/loaders/tasks'
 
-const route = useRoute('/Tasks/[id]')
-const id = route.params.id
-
-const task = ref<Task | null>(null)
+const taskStore = useTaskStore()
+const { task } = storeToRefs(taskStore)
+const { getSingleTask } = taskStore
+const { id } = useRoute('/Tasks/[id]').params
 
 watch(
   () => task.value?.name,
@@ -14,15 +13,7 @@ watch(
   },
 )
 
-const getTask = async () => {
-  const { data, error, status } = await taskQuery(id)
-
-  if (error) useErrorStore().setError({ error, customCode: status })
-
-  task.value = data
-}
-
-await getTask()
+await getSingleTask(id)
 </script>
 
 <template>
