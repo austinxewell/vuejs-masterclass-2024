@@ -16,8 +16,6 @@ const { getGroupedCollabs, groupedCollabs } = useCollabs()
 
 await getGroupedCollabs(tasks.value ?? [])
 
-console.log(groupedCollabs.value)
-
 const columnsWithCollabs = columns(groupedCollabs)
 </script>
 
