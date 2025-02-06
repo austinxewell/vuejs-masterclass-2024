@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import AppInPlaceEditText from '@/components/AppInPlaceEdit/AppInPlaceEditText.vue'
 import { useTaskStore } from '@/stores/loaders/tasks'
+
 const taskStore = useTaskStore()
 
 const { task } = storeToRefs(taskStore)
