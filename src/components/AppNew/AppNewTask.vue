@@ -1,15 +1,64 @@
 <script setup lang="ts">
 import type { CreateNewTask } from '@/types/CreateNewForm'
+import { createNewTaskQuery, profilesQuery, projectsQuery } from '@/utils/supaQueries'
 import { FormKit } from '@formkit/vue'
 
 const sheetOpen = defineModel<boolean>()
 
-const createTask = async (formData: CreateNewTask) => {
-  await new Promise((resolve) => {
-    setTimeout(() => {
-      resolve(console.log(formData))
-    }, 2000)
+type SelectOption = { label: string; value: number | string }
+
+const selectOptions = ref({
+  projects: [] as SelectOption[],
+  profiles: [] as SelectOption[],
+})
+
+const getProjectOptions = async () => {
+  const { data: allProjects } = await projectsQuery
+
+  if (!allProjects) return
+
+  allProjects.forEach((project) => {
+    selectOptions.value.projects.push({
+      label: project.name,
+      value: project.id,
+    })
   })
+}
+
+const getProfileOptions = async () => {
+  const { data: allProfiles } = await profilesQuery
+
+  if (!allProfiles) return
+
+  allProfiles.forEach((profile) => {
+    selectOptions.value.profiles.push({
+      label: profile.full_name,
+      value: profile.id,
+    })
+  })
+}
+
+const getOptions = async () => {
+  await Promise.all([getProjectOptions(), getProfileOptions()])
+}
+
+getOptions()
+
+const { profile } = storeToRefs(useAuthStore())
+
+const createTask = async (formData: CreateNewTask) => {
+  const task = {
+    ...formData,
+    collaborators: [profile.value!.id],
+  }
+
+  const { error } = await createNewTaskQuery(task)
+
+  if (error) {
+    console.log(error)
+  }
+
+  sheetOpen.value = false
 }
 </script>
 
@@ -20,28 +69,46 @@ const createTask = async (formData: CreateNewTask) => {
         <SheetTitle>Create New Task</SheetTitle>
       </SheetHeader>
 
-      <FormKit type="form" @submit="createTask" submit-label="Create Task">
-        <FormKit label="Name" placeholder="My New Task" />
+      <FormKit
+        type="form"
+        @submit="createTask"
+        submit-label="Create Task"
+        :config="{
+          validationVisibility: 'submit',
+        }"
+      >
+        <FormKit
+          type="text"
+          name="name"
+          id="name"
+          label="Name"
+          placeholder="My New Task"
+          validation="required|length:1,255"
+        />
         <FormKit
           type="select"
-          name="for"
-          label="For"
+          name="profile_id"
+          id="profile_id"
+          label="User"
           placeholder="Select a User"
-          :options="[{ label: 'Item name', value: 1 }]"
+          :options="selectOptions.profiles"
+          validation="required|length:1,255"
+        />
+        <FormKit
+          type="select"
+          name="project_id"
+          id="project_id"
+          label="Project"
+          placeholder="Select a Project"
+          :options="selectOptions.projects"
+          validation="required"
         />
         <FormKit
           type="textarea"
           name="description"
           label="Description"
           placeholder="Task Description"
-        />
-        <FormKit
-          type="select"
-          name="project"
-          id="project"
-          label="Project"
-          placeholder="Select a Project"
-          :options="[{ label: 'Item name', value: 1 }]"
+          validation="length:0,500"
         />
       </FormKit>
     </SheetContent>
