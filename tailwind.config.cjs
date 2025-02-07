@@ -9,6 +9,7 @@ module.exports = {
     './index.html',
     './src/**/*.{vue,js,ts,jsx,tsx}',
     './components/**/*.{vue,js,ts,jsx,tsx}',
+    './formkit.theme.ts',
   ],
 
   theme: {
