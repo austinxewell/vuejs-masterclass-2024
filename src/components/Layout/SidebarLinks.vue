@@ -29,7 +29,7 @@ const { menuOpen } = useMenu()
       exactActiveClass="text-primary bg-muted"
       :to="link.to"
       class="nav-link"
-      :class="{ 'justify-normal': menuOpen, 'justify-center': !menuOpen }"
+      :class="{ 'justify-normal': menuOpen, 'justify-center text-2xl': !menuOpen }"
     >
       <iconify-icon :icon="link.icon"></iconify-icon>
       <span class="text-nowrap" :class="{ block: menuOpen, hidden: !menuOpen }">
@@ -40,7 +40,7 @@ const { menuOpen } = useMenu()
     <div
       v-else
       class="nav-link cursor-pointer"
-      :class="{ 'justify-normal': menuOpen, 'justify-center': !menuOpen }"
+      :class="{ 'justify-normal': menuOpen, 'justify-center text-2xl': !menuOpen }"
       @click="emitActionClicked(link.title)"
     >
       <iconify-icon :icon="link.icon"></iconify-icon>
