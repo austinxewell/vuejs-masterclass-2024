@@ -2,22 +2,22 @@
 import { profileQuery } from '@/utils/supaQueries'
 import type { Tables } from 'database/types'
 
-const { username } = useRoute('/users/[username]').params
+const { user } = useAuthStore()
 
 usePageStore().pageData.title = ''
 
 const profile = ref<Tables<'profiles'> | null>(null)
-const getTasks = async () => {
+const getProfile = async () => {
   const { data, error, status } = await profileQuery({
-    column: 'username',
-    value: username,
+    column: 'id',
+    value: user?.id as string,
   })
 
   if (error) useErrorStore().setError({ error, customCode: status })
   profile.value = data
 }
 
-await getTasks()
+await getProfile()
 </script>
 
 <template>
@@ -32,5 +32,6 @@ await getTasks()
       <h1 class="mt-5 text-4xl font-bold">{{ profile?.full_name }}</h1>
       <p class="mt-2 text-sm">{{ profile?.bio }}</p>
     </div>
+    <Button>Edit profile</Button>
   </div>
 </template>

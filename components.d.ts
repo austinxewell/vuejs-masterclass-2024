@@ -7,12 +7,15 @@ export {}
 /* prettier-ignore */
 declare module 'vue' {
   export interface GlobalComponents {
+    AppEditProfile: typeof import('./src/components/AppEdit/AppEditProfile.vue')['default']
     AppErrorDevSection: typeof import('./src/components/AppError/AppErrorDevSection.vue')['default']
     AppErrorPage: typeof import('./src/components/AppError/AppErrorPage.vue')['default']
     AppErrorProdSection: typeof import('./src/components/AppError/AppErrorProdSection.vue')['default']
+    AppHero: typeof import('./src/components/ui/AppHero.vue')['default']
     AppInPlaceEditStatus: typeof import('./src/components/AppInPlaceEdit/AppInPlaceEditStatus.vue')['default']
     AppInPlaceEditText: typeof import('./src/components/AppInPlaceEdit/AppInPlaceEditText.vue')['default']
     AppInPlaceEditTextArea: typeof import('./src/components/AppInPlaceEdit/AppInPlaceEditTextArea.vue')['default']
+    AppNewProject: typeof import('./src/components/AppNew/AppNewProject.vue')['default']
     AppNewTask: typeof import('./src/components/AppNew/AppNewTask.vue')['default']
     AppSidebar: typeof import('./src/components/Layout/AppSidebar.vue')['default']
     AuthLayout: typeof import('./src/components/Layout/main/AuthLayout.vue')['default']
@@ -41,6 +44,7 @@ declare module 'vue' {
     DropdownMenuSubContent: typeof import('./src/components/ui/dropdown-menu/DropdownMenuSubContent.vue')['default']
     DropdownMenuSubTrigger: typeof import('./src/components/ui/dropdown-menu/DropdownMenuSubTrigger.vue')['default']
     DropdownMenuTrigger: typeof import('./src/components/ui/dropdown-menu/DropdownMenuTrigger.vue')['default']
+    Egk: typeof import('./src/components/ui/egk.vue')['default']
     GuestLayout: typeof import('./src/components/Layout/main/GuestLayout.vue')['default']
     Input: typeof import('./src/components/ui/input/Input.vue')['default']
     Label: typeof import('./src/components/ui/label/Label.vue')['default']

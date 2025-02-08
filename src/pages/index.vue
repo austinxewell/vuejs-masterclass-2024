@@ -1,12 +1,7 @@
-<script setup lang="ts">
-usePageStore().pageData.title = 'Homepage'
+<script lang="ts">
+usePageStore().pageData.title = 'Welcome to Pulse!'
 </script>
 
 <template>
-  <div>
-    <h1>Home Page</h1>
-    <RouterLink to="/Projects">Projects</RouterLink>
-  </div>
+  <AppHero />
 </template>
-
-<style scoped></style>
