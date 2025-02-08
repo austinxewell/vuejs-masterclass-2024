@@ -28,6 +28,10 @@ const signin = async () => {
 
   handleServerError(error)
 }
+
+useMeta({
+  title: 'Login | Pulse',
+})
 </script>
 
 <template>

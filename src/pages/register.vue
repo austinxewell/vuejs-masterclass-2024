@@ -16,6 +16,10 @@ const signup = async () => {
 
   if (isRegistered) router.push('/')
 }
+
+useMeta({
+  title: 'Register | Pulse',
+})
 </script>
 
 <template>
