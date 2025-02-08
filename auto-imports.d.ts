@@ -64,7 +64,7 @@ declare global {
   const useErrorStore: typeof import('./src/stores/error')['useErrorStore']
   const useFormErrors: typeof import('./src/composables/formErrors')['useFormErrors']
   const useId: typeof import('vue')['useId']
-  const useLink: typeof import('vue-router')['useLink']
+  const useLink: (typeof import('vue-router'))['useLink']
   const useMeta: typeof import('vue-meta')['useMeta']
   const useModel: typeof import('vue')['useModel']
   const usePageStore: typeof import('./src/stores/page')['usePageStore']
