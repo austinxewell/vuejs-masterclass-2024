@@ -6,7 +6,7 @@ interface Point {
   y: number
 }
 
-defineComponent({
+export default defineComponent({
   name: 'ECGComponent',
   data() {
     return {
