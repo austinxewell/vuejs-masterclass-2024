@@ -16,7 +16,15 @@ await getSingleTask(id)
 
 const { getProfilesByIds } = useCollabs()
 
+interface Profile {
+  id: string
+  username: string
+  avatar_url: string
+}
+
 const collabs = task.value?.collaborators ? await getProfilesByIds(task.value?.collaborators) : []
+
+const validCollabs = collabs.filter((collab) => !('error' in collab)) as Profile[]
 
 const deleteLoading = ref(false)
 const router = useRouter()
@@ -60,7 +68,7 @@ const triggerDelete = async () => {
             <div class="flex">
               <Avatar
                 class="-mr-4 border border-primary hover:scale-110 transition-transform"
-                v-for="collab in collabs"
+                v-for="collab in validCollabs"
                 :key="collab.id"
               >
                 <RouterLink

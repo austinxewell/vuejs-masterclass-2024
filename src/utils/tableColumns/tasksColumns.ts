@@ -1,12 +1,11 @@
 import type { ColumnDef } from '@tanstack/vue-table'
 import type { TasksWithProjects } from '../supaQueries'
 import { RouterLink } from 'vue-router'
-import AppInPlaceEditStatus from '@/components/AppInPlaceEdit/AppInPlaceEditStatus.vue'
-import type { Ref } from 'vue'
 import type { GroupedCollabs } from '@/types/GroupedCollabs'
 import Avatar from '@/components/ui/avatar/Avatar.vue'
 import AvatarImage from '@/components/ui/avatar/AvatarImage.vue'
 import AvatarFallback from '@/components/ui/avatar/AvatarFallback.vue'
+import AppInPlaceEditStatus from '@/components/AppInPlaceEdit/AppInPlaceEditStatus.vue'
 
 export const columns = (collabs: Ref<GroupedCollabs>): ColumnDef<TasksWithProjects[0]>[] => [
   {
@@ -30,7 +29,10 @@ export const columns = (collabs: Ref<GroupedCollabs>): ColumnDef<TasksWithProjec
       return h(
         'div',
         { class: 'text-left font-medium' },
-        h(AppInPlaceEditStatus, { modelValue: row.original.status, readonly: true }),
+        h(AppInPlaceEditStatus, {
+          modelValue: row.original.status,
+          readonly: true,
+        }),
       )
     },
   },

@@ -7,3 +7,8 @@ export interface CustomError extends Error {
 export interface ExtendedPostgrestError extends PostgrestError {
   statusCode?: number
 }
+export interface ParserError<T> {
+  error: true
+  message: string
+  data: T
+}
