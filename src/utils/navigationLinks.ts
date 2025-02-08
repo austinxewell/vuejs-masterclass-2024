@@ -19,7 +19,7 @@ export const navLinks = [
 export const accountLinks = [
   {
     title: 'Profile',
-    to: '/users/profile',
+    to: '/profile',
     icon: 'lucide:user',
   },
   {
