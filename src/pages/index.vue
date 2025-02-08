@@ -1,15 +1,7 @@
-<script setup lang="ts">
-usePageStore().pageData.title = 'Homepage'
-
-useMeta({
-  title: 'Dashboard | Pulse',
-})
+<script lang="ts">
+usePageStore().pageData.title = 'Welcome to Pulse!'
 </script>
 
 <template>
-  <div>
-    <h1>Home Page</h1>
-  </div>
+  <AppHero />
 </template>
-
-<style scoped></style>

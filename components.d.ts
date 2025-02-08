@@ -11,6 +11,7 @@ declare module 'vue' {
     AppErrorDevSection: typeof import('./src/components/AppError/AppErrorDevSection.vue')['default']
     AppErrorPage: typeof import('./src/components/AppError/AppErrorPage.vue')['default']
     AppErrorProdSection: typeof import('./src/components/AppError/AppErrorProdSection.vue')['default']
+    AppHero: typeof import('./src/components/ui/AppHero.vue')['default']
     AppInPlaceEditStatus: typeof import('./src/components/AppInPlaceEdit/AppInPlaceEditStatus.vue')['default']
     AppInPlaceEditText: typeof import('./src/components/AppInPlaceEdit/AppInPlaceEditText.vue')['default']
     AppInPlaceEditTextArea: typeof import('./src/components/AppInPlaceEdit/AppInPlaceEditTextArea.vue')['default']
