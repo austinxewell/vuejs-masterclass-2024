@@ -1,8 +1,9 @@
 <script setup lang="ts">
-const { slug } = useRoute('/Projects/[slug]').params
-const projectLoader = useProjectsStore()
-const { project } = storeToRefs(projectLoader)
-const { getSingleProject, updateProject } = projectLoader
+const { slug } = useRoute('/projects/[slug]').params
+
+const projectsLoader = useProjectsStore()
+const { project } = storeToRefs(projectsLoader)
+const { getSingleProject, updateProject } = projectsLoader
 
 watch(
   () => project.value?.name,
@@ -32,7 +33,11 @@ const collabs = project.value?.collaborators
       <TableRow>
         <TableHead> Description </TableHead>
         <TableCell>
-          <AppInPlaceEditTextArea v-model="project.description" @commit="updateProject" />
+          <AppInPlaceEditTextarea
+            class="h-20"
+            v-model="project.description"
+            @commit="updateProject"
+          />
         </TableCell>
       </TableRow>
       <TableRow>
@@ -52,7 +57,10 @@ const collabs = project.value?.collaborators
             >
               <RouterLink
                 class="w-full h-full flex items-center justify-center"
-                :to="{ name: '/users/[username]', params: { username: collab.username } }"
+                :to="{
+                  name: '/users/[username]',
+                  params: { username: collab.username },
+                }"
               >
                 <AvatarImage :src="collab.avatar_url || ''" alt="" />
                 <AvatarFallback> </AvatarFallback>
@@ -80,12 +88,14 @@ const collabs = project.value?.collaborators
                 <TableCell class="p-0">
                   <RouterLink
                     class="text-left block hover:bg-muted p-4"
-                    :to="{ name: '/Tasks/[id]', params: { id: task.id } }"
+                    :to="{ name: '/tasks/[id]', params: { id: task.id } }"
                   >
                     {{ task.name }}
                   </RouterLink>
                 </TableCell>
-                <TableCell><AppInPlaceEditStatus readonly :modelValue="task.status" /></TableCell>
+                <TableCell>
+                  <AppInPlaceEditStatus readonly :modelValue="task.status" />
+                </TableCell>
                 <TableCell> {{ task.due_date }} </TableCell>
               </TableRow>
             </TableBody>
@@ -99,19 +109,19 @@ const collabs = project.value?.collaborators
             This project doesn't have documents yet...
           </p>
           <!-- <Table>
-            <TableHeader>
-              <TableRow>
-                <TableHead> Name </TableHead>
-                <TableHead> Visibility </TableHead>
-              </TableRow>
-            </TableHeader>
-            <TableBody>
-              <TableRow>
-                <TableCell> Lorem ipsum dolor sit amet. </TableCell>
-                <TableCell> Private </TableCell>
-              </TableRow>
-            </TableBody>
-          </Table> -->
+          <TableHeader>
+            <TableRow>
+              <TableHead> Name </TableHead>
+              <TableHead> Visibility </TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            <TableRow>
+              <TableCell> Lorem ipsum dolor sit amet. </TableCell>
+              <TableCell> Private </TableCell>
+            </TableRow>
+          </TableBody>
+        </Table> -->
         </div>
       </div>
     </section>

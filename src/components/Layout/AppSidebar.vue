@@ -2,41 +2,7 @@
 import { menuKey } from '@/utils/injectionKeys'
 import type { MenuInjectionsOptions } from '@/utils/injectionKeys'
 import { useWindowSize } from '@vueuse/core'
-
-const links = [
-  {
-    title: 'Dashboard',
-    to: '/',
-    icon: 'lucide:house',
-  },
-  {
-    title: 'Projects',
-    to: '/projects',
-    icon: 'lucide:building-2',
-  },
-  {
-    title: 'My Tasks',
-    to: '/tasks',
-    icon: 'lucide:badge-check',
-  },
-]
-
-const accountLinks = [
-  {
-    title: 'Profile',
-    to: '/profile',
-    icon: 'lucide:user',
-  },
-  {
-    title: 'Settings',
-    to: '/settings',
-    icon: 'lucide:settings',
-  },
-  {
-    title: 'Sign Out',
-    icon: 'lucide:log-out',
-  },
-]
+import { navLinks, accountLinks } from '@/utils/navigationLinks'
 
 const router = useRouter()
 
@@ -49,7 +15,7 @@ const executeAction = async (linkTitle: string) => {
   }
 }
 
-defineEmits(['task-clicked'])
+defineEmits(['task-clicked', 'project-clicked'])
 
 const { menuOpen, toggleMenu } = inject(menuKey) as MenuInjectionsOptions
 const windowWidth = useWindowSize().width
@@ -81,14 +47,14 @@ watchEffect(() => {
         </DropdownMenuTrigger>
         <DropdownMenuContent>
           <DropdownMenuItem @click="$emit('task-clicked')">Task</DropdownMenuItem>
-          <DropdownMenuItem>Project</DropdownMenuItem>
+          <DropdownMenuItem @click="$emit('project-clicked')">Project</DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
     </div>
 
     <nav class="flex flex-col gap-2 justify-between h-full relative">
       <div>
-        <SidebarLinks :links="links" />
+        <SidebarLinks :links="navLinks" />
       </div>
 
       <div class="border-y text-center bg-background py-3">

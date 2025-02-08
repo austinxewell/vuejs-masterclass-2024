@@ -1,12 +1,9 @@
 <script setup lang="ts">
-import AppInPlaceEditText from '@/components/AppInPlaceEdit/AppInPlaceEditText.vue'
-import { useTaskStore } from '@/stores/loaders/tasks'
+const { id } = useRoute('/tasks/[id]').params
 
-const taskStore = useTaskStore()
-
-const { task } = storeToRefs(taskStore)
-const { getSingleTask, updateTask, deleteTask } = taskStore
-const { id } = useRoute('/Tasks/[id]').params
+const tasksLoader = useTaskStore()
+const { task } = storeToRefs(tasksLoader)
+const { getSingleTask, updateTask, deleteTask } = tasksLoader
 
 watch(
   () => task.value?.name,
@@ -27,7 +24,7 @@ const triggerDelete = async () => {
   deleteLoading.value = true
   await deleteTask()
   deleteLoading.value = false
-  router.push('/Tasks')
+  router.push({ name: '/tasks/' })
 }
 </script>
 
@@ -43,53 +40,48 @@ const triggerDelete = async () => {
       <TableRow>
         <TableHead> Description </TableHead>
         <TableCell>
-          <AppInPlaceEditTextArea v-model="task.description" @commit="updateTask" />
+          <AppInPlaceEditTextarea class="h-20" v-model="task.description" @commit="updateTask" />
         </TableCell>
       </TableRow>
       <TableRow>
-        <TableHead> Assignee </TableHead>
-        <TableCell>Lorem ipsum</TableCell>
-      </TableRow>
-      <TableRow>
         <TableHead> Project </TableHead>
-        <TableCell>
-          <RouterLink
-            :to="{ name: '/Projects/[slug]', params: { slug: task.projects?.slug as string } }"
-          >
-            {{ task.projects?.name }}
-          </RouterLink></TableCell
-        >
+        <TableCell>{{ task.projects?.name }}</TableCell>
       </TableRow>
       <TableRow>
         <TableHead> Status </TableHead>
-        <TableCell><AppInPlaceEditStatus v-model="task.status" @commit="updateTask" /></TableCell>
+        <TableCell>
+          <AppInPlaceEditStatus v-model="task.status" @commit="updateTask" />
+        </TableCell>
       </TableRow>
       <TableRow>
         <TableHead> Collaborators </TableHead>
         <TableCell>
-          <div class="flex">
-            <Avatar
-              class="-mr-4 border border-primary hover:scale-110 transition-transform"
-              v-for="collab in collabs"
-              :key="collab"
-            >
-              <RouterLink
-                class="w-full h-full flex items-center justify-center"
-                :to="{ name: '/users/[username]', params: { username: collab.username } }"
+          <TableCell>
+            <div class="flex">
+              <Avatar
+                class="-mr-4 border border-primary hover:scale-110 transition-transform"
+                v-for="collab in collabs"
+                :key="collab.id"
               >
-                <AvatarImage :src="collab.avatar_url" alt="" />
-                <AvatarFallback> </AvatarFallback>
-              </RouterLink>
-            </Avatar>
-          </div>
+                <RouterLink
+                  class="w-full h-full flex items-center justify-center"
+                  :to="{
+                    name: '/users/[username]',
+                    params: { username: collab.username },
+                  }"
+                >
+                  <AvatarImage :src="collab.avatar_url || ''" alt="" />
+                  <AvatarFallback> </AvatarFallback>
+                </RouterLink>
+              </Avatar>
+            </div>
+          </TableCell>
         </TableCell>
       </TableRow>
       <TableRow class="hover:bg-transparent">
         <TableHead class="align-top pt-4"> Comments </TableHead>
-
         <TableCell>
           Comments cards goes in here..
-
           <div class="flex flex-col justify-between p-3 bg-muted my-2 rounded-md">
             <textarea
               placeholder="Add your comment.."
@@ -105,7 +97,6 @@ const triggerDelete = async () => {
                 </button>
                 <button variant="ghost" @click.prevent>
                   <iconify-icon icon="lucide:image-up"></iconify-icon>
-
                   <span class="sr-only">Upload image</span>
                 </button>
               </div>
@@ -117,8 +108,12 @@ const triggerDelete = async () => {
 
     <Button @click="triggerDelete" class="self-end mt-3 w-full max-w-40" variant="destructive">
       <Transition name="scale" mode="out-in">
-        <iconify-icon v-if="deleteLoading" icon="lucide:loader-circle" class="mr-1 animate-spin" />
-        <iconify-icon v-else icon="lucide:trash-2" class="mr-1" />
+        <iconify-icon
+          v-if="deleteLoading"
+          icon="lucide:loader-circle"
+          class="mr-1 animate-spin"
+        ></iconify-icon>
+        <iconify-icon v-else icon="lucide:trash-2" class="mr-1"></iconify-icon>
       </Transition>
       Delete Task
     </Button>

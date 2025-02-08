@@ -7,12 +7,14 @@ export {}
 /* prettier-ignore */
 declare module 'vue' {
   export interface GlobalComponents {
+    AppEditProfile: typeof import('./src/components/AppEdit/AppEditProfile.vue')['default']
     AppErrorDevSection: typeof import('./src/components/AppError/AppErrorDevSection.vue')['default']
     AppErrorPage: typeof import('./src/components/AppError/AppErrorPage.vue')['default']
     AppErrorProdSection: typeof import('./src/components/AppError/AppErrorProdSection.vue')['default']
     AppInPlaceEditStatus: typeof import('./src/components/AppInPlaceEdit/AppInPlaceEditStatus.vue')['default']
     AppInPlaceEditText: typeof import('./src/components/AppInPlaceEdit/AppInPlaceEditText.vue')['default']
     AppInPlaceEditTextArea: typeof import('./src/components/AppInPlaceEdit/AppInPlaceEditTextArea.vue')['default']
+    AppNewProject: typeof import('./src/components/AppNew/AppNewProject.vue')['default']
     AppNewTask: typeof import('./src/components/AppNew/AppNewTask.vue')['default']
     AppSidebar: typeof import('./src/components/Layout/AppSidebar.vue')['default']
     AuthLayout: typeof import('./src/components/Layout/main/AuthLayout.vue')['default']

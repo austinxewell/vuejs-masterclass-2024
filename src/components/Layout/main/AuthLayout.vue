@@ -4,6 +4,7 @@ import { menuKey } from '@/utils/injectionKeys'
 const { pageData } = storeToRefs(usePageStore())
 
 const taskSheetOpen = ref(false)
+const projectSheetOpen = ref(false)
 
 const menuOpen = ref(false)
 const toggleMenu = () => (menuOpen.value = !menuOpen.value)
@@ -16,8 +17,9 @@ provide(menuKey, {
 
 <template>
   <div>
-    <AppSidebar @task-clicked="taskSheetOpen = true" />
+    <AppSidebar @task-clicked="taskSheetOpen = true" @project-clicked="projectSheetOpen = true" />
     <AppNewTask v-model="taskSheetOpen" />
+    <AppNewProject v-model="projectSheetOpen" />
     <div
       class="flex flex-col transition-[margin]"
       :class="{ 'ml-52': menuOpen, 'ml-24': !menuOpen }"
