@@ -16,9 +16,17 @@ await getSingleProject(slug)
 
 const { getProfilesByIds } = useCollabs()
 
+interface Profile {
+  id: string
+  username: string
+  avatar_url: string
+}
+
 const collabs = project.value?.collaborators
   ? await getProfilesByIds(project.value?.collaborators)
   : []
+
+const validCollabs = collabs.filter((collab) => !('error' in collab)) as Profile[]
 </script>
 
 <template>
@@ -52,7 +60,7 @@ const collabs = project.value?.collaborators
           <div class="flex">
             <Avatar
               class="-mr-4 border border-primary hover:scale-110 transition-transform"
-              v-for="collab in collabs"
+              v-for="collab in validCollabs"
               :key="collab.id"
             >
               <RouterLink

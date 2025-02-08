@@ -20,8 +20,8 @@ export const useCollabs = () => {
 
     const results = await Promise.all(promises)
 
-    filteredItems.forEach((items, index) => {
-      groupedCollabs.value[items.id] = results[index]
+    filteredItems.forEach((item, index) => {
+      groupedCollabs.value[item.id] = results[index]
     })
   }
 

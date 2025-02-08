@@ -1,7 +1,9 @@
-<script lang="ts">
+<script setup lang="ts">
 usePageStore().pageData.title = 'Welcome to Pulse!'
 </script>
 
 <template>
-  <AppHero />
+  <div>
+    <AppHero />
+  </div>
 </template>
