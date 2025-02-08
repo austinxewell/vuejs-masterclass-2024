@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { useMenu } from '@/composables/menu'
+import { menuKey, type MenuInjectionsOptions } from '@/utils/injectionKeys'
 
 interface LinkProp {
   title: string
@@ -19,7 +19,7 @@ const emitActionClicked = (linkTitle: string) => {
   emits('actionClicked', linkTitle)
 }
 
-const { menuOpen } = useMenu()
+const { menuOpen } = inject(menuKey) as MenuInjectionsOptions
 </script>
 
 <template>
