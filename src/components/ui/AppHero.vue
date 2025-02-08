@@ -1,4 +1,4 @@
-<script lang="ts">
+<!-- <script lang="ts">
 import { defineComponent } from 'vue'
 
 interface Point {
@@ -53,7 +53,7 @@ export default defineComponent({
     },
   },
 })
-</script>
+</script> -->
 
 <template>
   <div class="relative flex items-center justify-center h-[80vh] text-center px-6">
@@ -69,7 +69,7 @@ export default defineComponent({
       </h1>
     </div>
 
-    <div class="relative w-full h-40 mt-6">
+    <!-- <div class="relative w-full h-40 mt-6">
       <svg
         class="w-full h-full"
         xmlns="http://www.w3.org/2000/svg"
@@ -94,7 +94,7 @@ export default defineComponent({
 
         <path :d="pathData" fill="transparent" stroke="url(#ecgGradient)" stroke-width="2" />
       </svg>
-    </div>
+    </div> -->
   </div>
 </template>
 
