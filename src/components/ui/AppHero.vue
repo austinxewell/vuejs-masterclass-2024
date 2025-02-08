@@ -1,52 +1,3 @@
-<template>
-  <div class="relative flex items-center justify-center h-[80vh] text-center px-6">
-    <!-- Gradient Background -->
-    <div
-      class="absolute inset-0 bg-gradient-to-r from-[#f3f4f6] via-[#e5e7eb] to-[#f3f4f6] dark:from-[#111827] dark:via-[#1f2937] dark:to-[#111827]"
-    ></div>
-
-    <!-- Hero Content -->
-    <div class="relative z-10 max-w-4xl">
-      <!-- Main Text -->
-      <h1
-        class="p-2 text-3xl sm:text-4xl md:text-5xl font-extrabold text-center leading-[1.3] text-transparent animate-gradient-text"
-      >
-        Organizing projects to simplify your workflow
-      </h1>
-    </div>
-
-    <!-- ECG Graph -->
-    <div class="relative w-full h-40 mt-6">
-      <svg
-        class="w-full h-full"
-        xmlns="http://www.w3.org/2000/svg"
-        :viewBox="`0 0 ${width} ${height}`"
-        :width="width"
-        :height="height"
-      >
-        <!-- Gradient for stroke -->
-        <defs>
-          <linearGradient
-            id="ecgGradient"
-            x1="0%"
-            y1="0%"
-            x2="100%"
-            y2="0%"
-            gradientUnits="userSpaceOnUse"
-          >
-            <stop offset="0%" stop-color="#1f2937" />
-            <stop offset="50%" stop-color="#4b5563" />
-            <stop offset="100%" stop-color="#6b7280" />
-          </linearGradient>
-        </defs>
-
-        <!-- Path representing ECG graph with gradient stroke -->
-        <path :d="pathData" fill="transparent" stroke="url(#ecgGradient)" stroke-width="2" />
-      </svg>
-    </div>
-  </div>
-</template>
-
 <script lang="ts">
 import { defineComponent } from 'vue'
 
@@ -55,7 +6,7 @@ interface Point {
   y: number
 }
 
-export default defineComponent({
+defineComponent({
   name: 'ECGComponent',
   data() {
     return {
@@ -104,8 +55,50 @@ export default defineComponent({
 })
 </script>
 
+<template>
+  <div class="relative flex items-center justify-center h-[80vh] text-center px-6">
+    <div
+      class="absolute inset-0 bg-gradient-to-r from-[#f3f4f6] via-[#e5e7eb] to-[#f3f4f6] dark:from-[#111827] dark:via-[#1f2937] dark:to-[#111827]"
+    ></div>
+
+    <div class="relative z-10 max-w-4xl">
+      <h1
+        class="p-2 text-3xl sm:text-4xl md:text-5xl font-extrabold text-center leading-[1.3] text-transparent animate-gradient-text"
+      >
+        Organizing projects to simplify your workflow
+      </h1>
+    </div>
+
+    <div class="relative w-full h-40 mt-6">
+      <svg
+        class="w-full h-full"
+        xmlns="http://www.w3.org/2000/svg"
+        :viewBox="`0 0 ${width} ${height}`"
+        :width="width"
+        :height="height"
+      >
+        <defs>
+          <linearGradient
+            id="ecgGradient"
+            x1="0%"
+            y1="0%"
+            x2="100%"
+            y2="0%"
+            gradientUnits="userSpaceOnUse"
+          >
+            <stop offset="0%" stop-color="#1f2937" />
+            <stop offset="50%" stop-color="#4b5563" />
+            <stop offset="100%" stop-color="#6b7280" />
+          </linearGradient>
+        </defs>
+
+        <path :d="pathData" fill="transparent" stroke="url(#ecgGradient)" stroke-width="2" />
+      </svg>
+    </div>
+  </div>
+</template>
+
 <style scoped>
-/* Smooth gradient text transition from left to right */
 @keyframes gradientText {
   0% {
     background-position: 200% 0;
@@ -122,6 +115,4 @@ export default defineComponent({
   color: transparent;
   animation: gradientText 20s linear infinite;
 }
-
-/* No animation for ECG gradient */
 </style>
