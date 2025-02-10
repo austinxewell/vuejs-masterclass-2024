@@ -41,9 +41,9 @@ const PrimaryTestUserExists = async () => {
 
 const createPrimaryTestUser = async () => {
   logStep('Creating primary test user...')
-  const firstName = 'Test'
-  const lastName = 'Account'
-  const userName = 'testaccount1'
+  const firstName = 'Austin'
+  const lastName = 'Ewell'
+  const userName = 'austinxewell'
   const email = testingUserEmail
   const { data, error } = await supabase.auth.signUp({
     email: email,
