@@ -15,8 +15,6 @@ const executeAction = async (linkTitle: string) => {
   }
 }
 
-defineEmits(['task-clicked', 'project-clicked'])
-
 const { menuOpen, toggleMenu } = inject(menuKey) as MenuInjectionsOptions
 const windowWidth = useWindowSize().width
 
@@ -32,24 +30,12 @@ watchEffect(() => {
 <template>
   <aside
     class="flex flex-col h-screen gap-2 border-r fixed bg-muted/40 transition-[width]"
-    :class="{ 'w-52': menuOpen, 'w-24': !menuOpen }"
+    :class="{ 'w-52': menuOpen, 'w-14': !menuOpen }"
   >
-    <div class="flex h-16 items-center border-b px-2 lg:px-4 shrink-0 gap-1 justify-between">
+    <div class="flex h-16 items-center border-b pl-3 shrink-0 justify-start">
       <Button variant="outline" size="icon" class="w-8 h-8">
         <iconify-icon @click="toggleMenu" icon="lucide:menu"></iconify-icon>
       </Button>
-
-      <DropdownMenu>
-        <DropdownMenuTrigger>
-          <Button variant="outline" size="icon" class="w-8 h-8">
-            <iconify-icon icon="lucide:plus"></iconify-icon>
-          </Button>
-        </DropdownMenuTrigger>
-        <DropdownMenuContent>
-          <DropdownMenuItem @click="$emit('task-clicked')">Task</DropdownMenuItem>
-          <DropdownMenuItem @click="$emit('project-clicked')">Project</DropdownMenuItem>
-        </DropdownMenuContent>
-      </DropdownMenu>
     </div>
 
     <nav class="flex flex-col gap-2 justify-between h-full relative">

@@ -5,6 +5,8 @@ const { profile } = storeToRefs(useAuthStore())
 
 const isDark = useDark()
 const toggleDark = useToggle(isDark)
+
+defineEmits(['task-clicked', 'project-clicked'])
 </script>
 
 <template>
@@ -17,6 +19,17 @@ const toggleDark = useToggle(isDark)
       <Input class="w-full pl-8 bg-background" type="text" placeholder="Search ..." />
     </form>
     <div class="flex justify-center items-center gap-2">
+      <Button variant="outline" class="w-8 h-8">
+        <DropdownMenu v-if="profile">
+          <DropdownMenuTrigger>
+            <iconify-icon icon="lucide:plus"></iconify-icon>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent>
+            <DropdownMenuItem @click="$emit('task-clicked')">Task</DropdownMenuItem>
+            <DropdownMenuItem @click="$emit('project-clicked')">Project</DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
+      </Button>
       <Button @click="toggleDark()" class="w-8 h-8">
         <Transition name="scale" mode="out-in">
           <iconify-icon v-if="isDark" icon="lucide:sun" />
