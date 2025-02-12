@@ -14,7 +14,7 @@ declare module 'vue' {
     AppHero: typeof import('./src/components/ui/AppHero.vue')['default']
     AppInPlaceEditStatus: typeof import('./src/components/AppInPlaceEdit/AppInPlaceEditStatus.vue')['default']
     AppInPlaceEditText: typeof import('./src/components/AppInPlaceEdit/AppInPlaceEditText.vue')['default']
-    AppInPlaceEditTextArea: typeof import('./src/components/AppInPlaceEdit/AppInPlaceEditTextArea.vue')['default']
+    AppInPlaceEditTextarea: typeof import('./src/components/AppInPlaceEdit/AppInPlaceEditTextarea.vue')['default']
     AppNewProject: typeof import('./src/components/AppNew/AppNewProject.vue')['default']
     AppNewTask: typeof import('./src/components/AppNew/AppNewTask.vue')['default']
     AppSidebar: typeof import('./src/components/Layout/AppSidebar.vue')['default']
